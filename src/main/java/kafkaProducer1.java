@@ -29,7 +29,7 @@ public class kafkaProducer1
         Producer<String, String> producer = new KafkaProducer<String, String>(kafkaProducer1.getKafkaProps());
 
 
-        for (int i = 0; i <111 ; i++) {
+        for (int i = 0; i <4 ; i++) {
             producer.send(new ProducerRecord<String, String>("first" ,Integer.toString(i), Integer.toString(i) ));
             System.out.println("Producer produce ==>> "+Integer.toString(i));
             Thread.sleep(1000);

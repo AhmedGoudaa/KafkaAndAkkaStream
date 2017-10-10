@@ -1,8 +1,8 @@
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.common.TopicPartition;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 
 public class KafkaConsumer1 {
@@ -16,12 +16,12 @@ public class KafkaConsumer1 {
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("group.id", "test");
+        props.put("enable.auto.commit", false);
 
         return props;
     }
 
-
-    public static void m () throws Exception {
+    public static void onComplete(){
 
     }
 
@@ -44,6 +44,13 @@ public class KafkaConsumer1 {
 
                     System.out.println("key " + consumerRecord.key() + " Value ==>> " + consumerRecord.value()+" }");
                 }
+
+                kafkaConsumer.commitAsync();
+//                kafkaConsumer.commitAsync(new OffsetCommitCallback() {
+//                    public void onComplete(Map<TopicPartition, OffsetAndMetadata> map, Exception e) {
+//                        System.out.println("Kafka rocks it !! ");
+//                    }
+//                });
 
 
             }
